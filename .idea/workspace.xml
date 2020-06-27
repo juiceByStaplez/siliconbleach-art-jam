@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="229407c5-8252-4962-9081-94070b240f3c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/twitch-api.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/OAuthToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_27_015802_create_o_auth_tokens_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_27_023217_create_votes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VotesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Vote.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Vote.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +177,7 @@
       <workItem from="1593190602764" duration="810000" />
       <workItem from="1593191662285" duration="1061000" />
       <workItem from="1593194424935" duration="4819000" />
-      <workItem from="1593207730689" duration="1645000" />
+      <workItem from="1593207730689" duration="10150000" />
     </task>
     <servers />
   </component>
@@ -207,10 +214,14 @@
     </state>
     <state x="455" y="309" width="810" height="786" key="StructurePopup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593198145865" />
     <state x="222" y="226" width="771" height="560" key="StructurePopup/0.23.1680.957@0.23.1680.957" timestamp="1593199682584" />
-    <state x="174" y="23" width="1005" height="957" key="search.everywhere.popup" timestamp="1593201580224">
-      <screen x="0" y="23" width="1680" height="957" />
+    <state x="337" y="223" key="run.anything.popup" timestamp="1593230178919">
+      <screen x="0" y="23" width="1680" height="955" />
     </state>
-    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593197103169" />
+    <state x="337" y="223" key="run.anything.popup/0.23.1680.955@0.23.1680.955" timestamp="1593230178919" />
+    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup" timestamp="1593228735047">
+      <screen x="0" y="23" width="3440" height="1345" />
+    </state>
+    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593228735047" />
     <state x="174" y="23" width="1005" height="957" key="search.everywhere.popup/0.23.1680.957@0.23.1680.957" timestamp="1593201580224" />
   </component>
 </project>

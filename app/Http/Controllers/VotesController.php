@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Socialite\Facades\Socialite;
 
 class VotesController extends Controller
@@ -16,6 +17,11 @@ class VotesController extends Controller
      */
     public function index(Request $request)
     {
+        $votes = $request->query('votes');
+
+        $storeInSession = Cookie::make('votes', $votes);
+
+
         return Socialite::with('twitch')->redirect();
     }
 
@@ -24,9 +30,14 @@ class VotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request
+    )
     {
-        return Socialite::with('twitch')->redirect();
+        $storeVotes = $request->session()->flash('votes', $request->votes);
+
+        dump($storeVotes);
+
+//        return Socialite::with('twitch')->redirect();
     }
 
     /**
