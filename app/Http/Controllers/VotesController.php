@@ -21,8 +21,7 @@ class VotesController extends Controller
 
         $storeInSession = Cookie::make('votes', $votes);
 
-
-        return Socialite::with('twitch')->redirect();
+        return Socialite::with('twitch')->stateless()->redirect();
     }
 
     /**
@@ -30,20 +29,16 @@ class VotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request
-    )
+    public function create(Request $request)
     {
-        $storeVotes = $request->session()->flash('votes', $request->votes);
 
-        dump($storeVotes);
-
-//        return Socialite::with('twitch')->redirect();
+        return Socialite::with('twitch')->stateless()->redirect();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,7 +49,7 @@ class VotesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Vote  $vote
+     * @param \App\Vote $vote
      * @return \Illuminate\Http\Response
      */
     public function show(Vote $vote)
@@ -65,7 +60,7 @@ class VotesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Vote  $vote
+     * @param \App\Vote $vote
      * @return \Illuminate\Http\Response
      */
     public function edit(Vote $vote)
@@ -76,8 +71,8 @@ class VotesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Vote  $vote
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Vote $vote
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Vote $vote)
@@ -88,7 +83,7 @@ class VotesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Vote  $vote
+     * @param \App\Vote $vote
      * @return \Illuminate\Http\Response
      */
     public function destroy(Vote $vote)

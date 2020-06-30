@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('twitch_id');
             $table->string('avatar')->default('');
             $table->string('nickname');
+            $table->tinyInteger('voterStatus')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

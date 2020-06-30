@@ -16,11 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/authenticate', function(Request $request) {
+        $votes = $request->query('votes');
+
+        $request->session()->put('votes', $request->query('votes'));
+
+        return Socialite::with('twitch')->stateless()->redirect();
+});
 
 Route::get('/oauth/redirect', function (Request $request) {
 
-    $votesJSON = '["3_17_2_1_1593228677647_215","3_17_2_1_1593228677647_216"]';
-    $votes = json_decode($votesJSON);
+    $votes = $request->session()->get('votes');
+    $votes = explode(', ', $votes);
 
 
     $KOKO_STREAMER_ID = 104674657;
@@ -28,18 +35,22 @@ Route::get('/oauth/redirect', function (Request $request) {
     $GREPO_STREAMER_ID = 115202117;
     $RUSSELL_STREAMER_ID = 184003841;
 
-    $user = \Laravel\Socialite\Facades\Socialite::driver('twitch')->user();
+    $twitchOAuthUser = \Laravel\Socialite\Facades\Socialite::driver('twitch')->stateless()->user();
+
     $streamerIds = [$GREPO_STREAMER_ID, $RUSSELL_STREAMER_ID, $KOKO_STREAMER_ID, $IRIS_STREAMER_ID];
-    $accessTokenResponseBody = $user->accessTokenResponseBody;
 
-    $email = $user->getEmail();
+    // save for later, may need to store
+    //    $accessTokenResponseBody = $user->accessTokenResponseBody;
 
-    $preexistingUser = User::where('email', $email)->first();
+    $email = $twitchOAuthUser->getEmail();
 
-    if (!$preexistingUser) {
-        $username = $user->getNickname();
-        $twitchId = $user->getId();
-        $token = $user->accessTokenResponseBody['access_token'];
+    $preExistingUser = User::with('votes')->where('email', $email)->first();
+
+    $twitchId = $preExistingUser->twitch_id;
+    if (!$preExistingUser) {
+        $username = $twitchOAuthUser->getNickname();
+        $twitchId = $twitchOAuthUser->getId();
+        $token = $twitchOAuthUser->accessTokenResponseBody['access_token'];
 
         $client = new \romanzipp\Twitch\Twitch;
 
@@ -48,9 +59,7 @@ Route::get('/oauth/redirect', function (Request $request) {
 
         $followsStreamers = collect($streamerIds)->reduce(function ($followsAHost, $hostId) use ($client, $twitchId) {
             if (!$followsAHost) {
-                print_r("Checking for followers \n\r");
                 $result = $client->getFollows($twitchId, $hostId);
-                print_r("Received response");
                 if (count($result->data()) !== 0) {
                     $followsAHost = true;
                 } else {
@@ -64,26 +73,30 @@ Route::get('/oauth/redirect', function (Request $request) {
             return Response::json(['success' => false, 'message' => "{$username} is not following any of the hosts"]);
         }
 
-        $newUser = User::create([
-            'email' => $email,
-            'nickname' => $user->getNickname(),
-            'name' => $user->getName(),
-            'password' => Hash::make(\Illuminate\Support\Str::random(16)),
-            'twitch_id' => $twitchId,
-            'avatar' => $user->getAvatar(),
+        $twitchOAuthUser = User::create([
+            'email'       => $email,
+            'nickname'    => $twitchOAuthUser->getNickname(),
+            'name'        => $twitchOAuthUser->getName(),
+            'password'    => Hash::make(\Illuminate\Support\Str::random(16)),
+            'twitch_id'   => (int)$twitchId,
+            'avatar'      => $twitchOAuthUser->getAvatar(),
+            'voterStatus' => $followsStreamers,
         ]);
 
-        $createdVotes = [];
-        foreach($votes as $vote){
-            $createdVote = Vote::create([
-                'user_id' => $newUser->id,
-                'piece_id' => $vote
-            ]);
-
-            $createdVotes[] = $createdVote;
-        }
 
     }
+
+    $createdVotes = [];
+    foreach ($votes as $vote) {
+        $createdVote = Vote::create([
+            'user_id'  => $twitchOAuthUser->id,
+            'piece_id' => $vote
+        ]);
+
+        $createdVotes[] = $createdVote;
+    }
+
+    return redirect()->away(config('app.contest_url'), ['user' => $user, 'votes' => $votes]);
 });
 
 Route::resource('votes', 'VotesController');

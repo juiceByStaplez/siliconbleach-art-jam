@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="229407c5-8252-4962-9081-94070b240f3c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/OAuthToken.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_27_015802_create_o_auth_tokens_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_27_023217_create_votes_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VotesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VotesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Vote.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Vote.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,10 +153,11 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -177,7 +180,11 @@
       <workItem from="1593190602764" duration="810000" />
       <workItem from="1593191662285" duration="1061000" />
       <workItem from="1593194424935" duration="4819000" />
-      <workItem from="1593207730689" duration="10150000" />
+      <workItem from="1593207730689" duration="15521000" />
+      <workItem from="1593279008923" duration="322000" />
+      <workItem from="1593299193882" duration="3133000" />
+      <workItem from="1593354247729" duration="22595000" />
+      <workItem from="1593467542612" duration="5924000" />
     </task>
     <servers />
   </component>
@@ -188,6 +195,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="260" y="208" key="#Plugins" timestamp="1593279045219">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="260" y="208" key="#Plugins/-1920.166.1920.1080/0.23.3440.1417@0.23.3440.1417" timestamp="1593279045219" />
     <state width="1290" height="370" key="GridCell.Tab.0.bottom" timestamp="1593190454397">
       <screen x="0" y="23" width="3440" height="1345" />
     </state>
@@ -204,24 +215,35 @@
       <screen x="0" y="23" width="3440" height="1345" />
     </state>
     <state width="1290" height="370" key="GridCell.Tab.0.right/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593190454396" />
-    <state x="58" y="23" key="SettingsEditor" timestamp="1593199593614">
-      <screen x="0" y="23" width="1680" height="957" />
+    <state x="119" y="159" width="2435" height="1072" key="SettingsEditor" timestamp="1593499330439">
+      <screen x="0" y="23" width="3440" height="1345" />
     </state>
-    <state x="119" y="159" key="SettingsEditor/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593190425598" />
+    <state x="119" y="159" width="2435" height="1072" key="SettingsEditor/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593499330439" />
+    <state x="58" y="23" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1593355405964" />
     <state x="58" y="23" key="SettingsEditor/0.23.1680.957@0.23.1680.957" timestamp="1593199593614" />
-    <state x="222" y="226" width="771" height="560" key="StructurePopup" timestamp="1593199682584">
-      <screen x="0" y="23" width="1680" height="957" />
+    <state x="455" y="309" width="810" height="786" key="StructurePopup" timestamp="1593384707876">
+      <screen x="0" y="23" width="3440" height="1345" />
     </state>
-    <state x="455" y="309" width="810" height="786" key="StructurePopup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593198145865" />
+    <state x="455" y="309" width="810" height="786" key="StructurePopup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593384707876" />
     <state x="222" y="226" width="771" height="560" key="StructurePopup/0.23.1680.957@0.23.1680.957" timestamp="1593199682584" />
+    <state x="689" y="622" key="VCS.ChangelistChooser" timestamp="1593273318925">
+      <screen x="0" y="23" width="3440" height="1417" />
+    </state>
+    <state x="689" y="622" key="VCS.ChangelistChooser/0.23.3440.1417@0.23.3440.1417" timestamp="1593273318925" />
+    <state x="324" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593428895786">
+      <screen x="0" y="23" width="3440" height="1345" />
+    </state>
+    <state x="324" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593428895785" />
     <state x="337" y="223" key="run.anything.popup" timestamp="1593230178919">
       <screen x="0" y="23" width="1680" height="955" />
     </state>
     <state x="337" y="223" key="run.anything.popup/0.23.1680.955@0.23.1680.955" timestamp="1593230178919" />
-    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup" timestamp="1593228735047">
+    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup" timestamp="1593396948370">
       <screen x="0" y="23" width="3440" height="1345" />
     </state>
-    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593228735047" />
+    <state x="357" y="23" width="1005" height="1345" key="search.everywhere.popup/-1920.166.1920.1080/0.23.3440.1345@0.23.3440.1345" timestamp="1593396948370" />
+    <state x="357" y="23" width="1005" height="1417" key="search.everywhere.popup/-1920.166.1920.1080/0.23.3440.1417@0.23.3440.1417" timestamp="1593378222920" />
     <state x="174" y="23" width="1005" height="957" key="search.everywhere.popup/0.23.1680.957@0.23.1680.957" timestamp="1593201580224" />
+    <state x="357" y="23" width="1005" height="1417" key="search.everywhere.popup/0.23.3440.1417@0.23.3440.1417" timestamp="1593273345806" />
   </component>
 </project>

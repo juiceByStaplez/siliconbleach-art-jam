@@ -54,6 +54,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'contest_url' => env('SITE_URL', ''),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*
@@ -175,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
-    
+
 
     ],
 
