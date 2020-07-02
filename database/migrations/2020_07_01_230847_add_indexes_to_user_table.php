@@ -13,13 +13,9 @@ class AddIndexesToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
-
+        Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('twitch_id')->change();
-
-
             $table->unique('twitch_id', 'unique_twitch_id');
-            $table->unique('email', 'unique_email');
             $table->index('twitch_id');
         });
     }
@@ -31,10 +27,8 @@ class AddIndexesToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->bigInteger('twitch_id')->change();
-
-            $table->dropIndex('unique_email');
             $table->dropIndex('users_twitch_id_uindex');
         });
     }

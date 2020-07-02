@@ -4,97 +4,11 @@ use App\User;
 use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-const MINUTES_IN_A_MONTH = 43200;
-
-$siteURL = config('app.site_url');
-
-Route::get('/authenticate', function(Request $request) {
-        $request->session()->put('votes', $request->query('votes'));
-
-        return Socialite::with('twitch')->stateless()->redirect();
-});
-
-Route::get('/oauth/redirect', function (Request $request) use ($siteURL) {
-
-    $votes = $request->session()->get('votes');
-    $votes = explode(', ', $votes);
+use romanzipp\Twitch\Twitch;
 
 
-    $KOKO_STREAMER_ID = 104674657;
-    $IRIS_STREAMER_ID = 52191499;
-    $GREPO_STREAMER_ID = 115202117;
-    $RUSSELL_STREAMER_ID = 184003841;
-
-    $twitchOAuthUser = \Laravel\Socialite\Facades\Socialite::driver('twitch')->stateless()->user();
-
-    $streamerIds = [$GREPO_STREAMER_ID, $RUSSELL_STREAMER_ID, $KOKO_STREAMER_ID, $IRIS_STREAMER_ID];
-
-    // save for later, may need to store
-    //    $accessTokenResponseBody = $user->accessTokenResponseBody;
-
-    $email = $twitchOAuthUser->getEmail();
-
-    $user = User::with('votes')->where('email', $email)->first();
-
-    $twitchId = $user->twitch_id ?? $twitchOAuthUser->getId();
-    if (!$user) {
-        $username = $twitchOAuthUser->getNickname();
-        $twitchId = $twitchOAuthUser->getId();
-        $token = $twitchOAuthUser->accessTokenResponseBody['access_token'];
-
-        $client = new \romanzipp\Twitch\Twitch;
-
-        $client->setClientId(config('twitch-api.client_id'));
-        $client->setToken($token);
-
-        $followsStreamers = collect($streamerIds)->reduce(function ($followsAHost, $hostId) use ($client, $twitchId) {
-            if (!$followsAHost) {
-                $result = $client->getFollows($twitchId, $hostId);
-                if (count($result->data()) !== 0) {
-                    $followsAHost = true;
-                } else {
-                    print_r("Does not follow at least one streamer");
-                }
-            }
-            return $followsAHost;
-        }, false);
-
-        if (!$followsStreamers) {
-            return Response::json(['success' => false, 'message' => "{$username} is not following any of the hosts"]);
-        }
-
-        $user = User::create([
-            'email'       => $email,
-            'nickname'    => $twitchOAuthUser->getNickname(),
-            'name'        => $twitchOAuthUser->getName(),
-            'password'    => Hash::make(\Illuminate\Support\Str::random(16)),
-            'twitch_id'   => (int)$twitchId,
-            'avatar'      => $twitchOAuthUser->getAvatar(),
-            'voterStatus' => $followsStreamers,
-        ]);
-
-    }
-
-    $user = $preExistingUser ?? $user;
-
-    $createdVotes = [];
-    foreach ($votes as $vote) {
-        $createdVote = Vote::create([
-            'user_id'  => $user->id,
-            'piece_id' => $vote
-        ]);
-
-        $createdVotes[] = $createdVote;
-    }
-
-
-    $successfullyVotedRedirectURL = "$siteURL/jam?success=true";
-    return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, MINUTES_IN_A_MONTH );
-});
+Route::get('/authenticate', 'OAuthController@authenticate');
+Route::get('/oauth/redirect', 'OAuthController@getToken');
 
 Route::resource('votes', 'VotesController');
 
-Route::get('/', function (Request $request) {
-    return view('welcome');
-});

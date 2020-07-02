@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
-    public function show(Request $request, $twitchId)
+    public function votes(Request $request, $twitchId)
     {
-        $user = User::where('twitch_id', $twitchId)->first();
+        $user = User::with('votes')->where('twitch_id', $twitchId)->first();
 
         if(!$user) {
             return Response::json(['data' => []], 404);
         }
 
-        return Response::json(['user' => $user, 'votes' => $user->votes]);
+        return Response::json(['user' => $user]);
+
 
     }
 }

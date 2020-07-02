@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Vote;
+use App\User;
+
+use Response;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Cookie;
-use Laravel\Socialite\Facades\Socialite;
 
 class VotesController extends Controller
 {
@@ -17,33 +17,69 @@ class VotesController extends Controller
      */
     public function index(Request $request)
     {
-        $votes = $request->query('votes');
 
-        $storeInSession = Cookie::make('votes', $votes);
-
-        return Socialite::with('twitch')->stateless()->redirect()->withInput();
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create(Request $request)
     {
+        $siteURL = config('app.contest_url');
 
-        return Socialite::with('twitch')->stateless()->redirect();
+        $twitchId = $request->session()->pull('twitchId');
+
+        $user = User::where('twitch_id', $twitchId)->first();
+
+
+        $votes = $request->session()->pull('votes');
+        $votes = explode(',', $votes);
+
+
+        $createdVotes = [];
+        foreach ($votes as $vote) {
+            $createdVote = Vote::create([
+                'user_id'  => $user->id,
+                'piece_id' => $vote,
+            ]);
+
+            $createdVotes[] = $createdVote;
+        }
+
+        $successfullyVotedRedirectURL = "$siteURL/jam?success=true&twitch_id={$twitchId}";
+        return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $votes  = $request->votes;
+        $userId = $request->user['id'];
+
+        // check for deletes
+
+        $userVotes = Vote::where('user_id', $userId)->get()->pluck('piece_id');
+        $deletableVotes = $userVotes->diff($votes)->all();
+
+        foreach ($votes as $vote) {
+            $updatedVotes = Vote::updateOrCreate(
+                ['user_id' => $userId, 'piece_id' => $vote],
+                ['piece_id' => $vote]
+            );
+        }
+
+        $deleteVotes = Vote::whereIn('piece_id', $deletableVotes)->delete();
+
+        return Response::json(['success' => true], 200);
+
     }
 
     /**

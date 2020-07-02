@@ -56,6 +56,8 @@ return [
 
     'site_url' => env('SITE_URL', ''),
 
+    'contest_url' => env('CONTEST_URL', ''),
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

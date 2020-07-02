@@ -14,8 +14,7 @@ use App\Http\Controllers\VotesController;
 |
 */
 
-Route::get('/votes', 'VotesController@index');
-Route::group(['name' => 'votes'], function() {
-     Route::post('/votes', 'VotesController@create');
-});
+
+Route::get('/user/{twitchId}/votes', 'UserController@votes');
+Route::post('/votes', 'VotesController@store');
 

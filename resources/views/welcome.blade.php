@@ -82,6 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <h1>Art of Koko</h1>
+                    <h3>The art we all need</h3>
                 </div>
 
                 <div class="links">
