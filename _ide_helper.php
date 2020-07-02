@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.17.2 on 2020-06-26 17:08:15.
+ * Generated for Laravel 7.18.0 on 2020-07-02 00:14:35.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -13105,6 +13105,31 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
+     * @method static \Illuminate\Contracts\Filesystem\Filesystem assertExists(string|array $path)
+     * @method static \Illuminate\Contracts\Filesystem\Filesystem assertMissing(string|array $path)
+     * @method static array allDirectories(string|null $directory = null)
+     * @method static array allFiles(string|null $directory = null)
+     * @method static array directories(string|null $directory = null, bool $recursive = false)
+     * @method static array files(string|null $directory = null, bool $recursive = false)
+     * @method static bool append(string $path, string $data)
+     * @method static bool copy(string $from, string $to)
+     * @method static bool delete(string|array $paths)
+     * @method static bool deleteDirectory(string $directory)
+     * @method static bool exists(string $path)
+     * @method static bool makeDirectory(string $path)
+     * @method static bool move(string $from, string $to)
+     * @method static bool prepend(string $path, string $data)
+     * @method static bool put(string $path, string|resource $contents, mixed $options = [])
+     * @method static string|false putFile(string $path, \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file, mixed $options = [])
+     * @method static bool setVisibility(string $path, string $visibility)
+     * @method static bool writeStream(string $path, resource $resource, array $options = [])
+     * @method static int lastModified(string $path)
+     * @method static int size(string $path)
+     * @method static resource|null readStream(string $path)
+     * @method static string get(string $path)
+     * @method static string getVisibility(string $path)
+     * @method static string temporaryUrl(string $path, \DateTimeInterface $expiration, array $options = [])
+     * @method static string url(string $path)
      * @see \Illuminate\Filesystem\FilesystemManager
      */ 
     class Storage {
@@ -13113,7 +13138,7 @@ namespace Illuminate\Support\Facades {
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function drive($name = null)
@@ -13126,7 +13151,7 @@ namespace Illuminate\Support\Facades {
          * Get a filesystem instance.
          *
          * @param string|null $name
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function disk($name = null)
@@ -13138,7 +13163,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get a default cloud filesystem instance.
          *
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function cloud()
@@ -13151,7 +13176,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the local driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createLocalDriver($config)
@@ -13164,7 +13189,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the ftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createFtpDriver($config)
@@ -13177,7 +13202,7 @@ namespace Illuminate\Support\Facades {
          * Create an instance of the sftp driver.
          *
          * @param array $config
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
+         * @return \Illuminate\Contracts\Filesystem\Filesystem 
          * @static 
          */ 
         public static function createSftpDriver($config)
@@ -13262,482 +13287,6 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Filesystem\FilesystemManager $instance */
                         return $instance->extend($driver, $callback);
-        }
-        
-        /**
-         * Assert that the given file exists.
-         *
-         * @param string|array $path
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
-         * @static 
-         */ 
-        public static function assertExists($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->assertExists($path);
-        }
-        
-        /**
-         * Assert that the given file does not exist.
-         *
-         * @param string|array $path
-         * @return \Illuminate\Filesystem\FilesystemAdapter 
-         * @static 
-         */ 
-        public static function assertMissing($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->assertMissing($path);
-        }
-        
-        /**
-         * Determine if a file exists.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function exists($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->exists($path);
-        }
-        
-        /**
-         * Determine if a file or directory is missing.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function missing($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->missing($path);
-        }
-        
-        /**
-         * Get the full path for the file at the given "short" path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */ 
-        public static function path($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->path($path);
-        }
-        
-        /**
-         * Get the contents of a file.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-         * @static 
-         */ 
-        public static function get($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->get($path);
-        }
-        
-        /**
-         * Create a streamed response for a given file.
-         *
-         * @param string $path
-         * @param string|null $name
-         * @param array|null $headers
-         * @param string|null $disposition
-         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
-         * @static 
-         */ 
-        public static function response($path, $name = null, $headers = [], $disposition = 'inline')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->response($path, $name, $headers, $disposition);
-        }
-        
-        /**
-         * Create a streamed download response for a given file.
-         *
-         * @param string $path
-         * @param string|null $name
-         * @param array|null $headers
-         * @return \Symfony\Component\HttpFoundation\StreamedResponse 
-         * @static 
-         */ 
-        public static function download($path, $name = null, $headers = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->download($path, $name, $headers);
-        }
-        
-        /**
-         * Write the contents of a file.
-         *
-         * @param string $path
-         * @param string|resource $contents
-         * @param mixed $options
-         * @return bool 
-         * @static 
-         */ 
-        public static function put($path, $contents, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->put($path, $contents, $options);
-        }
-        
-        /**
-         * Store the uploaded file on the disk.
-         *
-         * @param string $path
-         * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param array $options
-         * @return string|false 
-         * @static 
-         */ 
-        public static function putFile($path, $file, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->putFile($path, $file, $options);
-        }
-        
-        /**
-         * Store the uploaded file on the disk with a given name.
-         *
-         * @param string $path
-         * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param string $name
-         * @param array $options
-         * @return string|false 
-         * @static 
-         */ 
-        public static function putFileAs($path, $file, $name, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->putFileAs($path, $file, $name, $options);
-        }
-        
-        /**
-         * Get the visibility for the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @static 
-         */ 
-        public static function getVisibility($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getVisibility($path);
-        }
-        
-        /**
-         * Set the visibility for the given path.
-         *
-         * @param string $path
-         * @param string $visibility
-         * @return bool 
-         * @static 
-         */ 
-        public static function setVisibility($path, $visibility)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->setVisibility($path, $visibility);
-        }
-        
-        /**
-         * Prepend to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @param string $separator
-         * @return bool 
-         * @static 
-         */ 
-        public static function prepend($path, $data, $separator = '
-')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->prepend($path, $data, $separator);
-        }
-        
-        /**
-         * Append to a file.
-         *
-         * @param string $path
-         * @param string $data
-         * @param string $separator
-         * @return bool 
-         * @static 
-         */ 
-        public static function append($path, $data, $separator = '
-')
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->append($path, $data, $separator);
-        }
-        
-        /**
-         * Delete the file at a given path.
-         *
-         * @param string|array $paths
-         * @return bool 
-         * @static 
-         */ 
-        public static function delete($paths)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->delete($paths);
-        }
-        
-        /**
-         * Copy a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */ 
-        public static function copy($from, $to)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->copy($from, $to);
-        }
-        
-        /**
-         * Move a file to a new location.
-         *
-         * @param string $from
-         * @param string $to
-         * @return bool 
-         * @static 
-         */ 
-        public static function move($from, $to)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->move($from, $to);
-        }
-        
-        /**
-         * Get the file size of a given file.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */ 
-        public static function size($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->size($path);
-        }
-        
-        /**
-         * Get the mime-type of a given file.
-         *
-         * @param string $path
-         * @return string|false 
-         * @static 
-         */ 
-        public static function mimeType($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->mimeType($path);
-        }
-        
-        /**
-         * Get the file's last modification time.
-         *
-         * @param string $path
-         * @return int 
-         * @static 
-         */ 
-        public static function lastModified($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->lastModified($path);
-        }
-        
-        /**
-         * Get the URL for the file at the given path.
-         *
-         * @param string $path
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function url($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->url($path);
-        }
-        
-        /**
-         * Get a resource to read the file.
-         *
-         * @param string $path
-         * @return resource|null The path resource or null on failure.
-         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
-         * @static 
-         */ 
-        public static function readStream($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->readStream($path);
-        }
-        
-        /**
-         * Write a new file using a stream.
-         *
-         * @param string $path
-         * @param resource $resource
-         * @param array $options
-         * @return bool 
-         * @throws \InvalidArgumentException If $resource is not a file handle.
-         * @throws \Illuminate\Contracts\Filesystem\FileExistsException
-         * @static 
-         */ 
-        public static function writeStream($path, $resource, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->writeStream($path, $resource, $options);
-        }
-        
-        /**
-         * Get a temporary URL for the file at the given path.
-         *
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return string 
-         * @throws \RuntimeException
-         * @static 
-         */ 
-        public static function temporaryUrl($path, $expiration, $options = [])
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->temporaryUrl($path, $expiration, $options);
-        }
-        
-        /**
-         * Get a temporary URL for the file at the given path.
-         *
-         * @param \League\Flysystem\AwsS3v3\AwsS3Adapter $adapter
-         * @param string $path
-         * @param \DateTimeInterface $expiration
-         * @param array $options
-         * @return string 
-         * @static 
-         */ 
-        public static function getAwsTemporaryUrl($adapter, $path, $expiration, $options)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getAwsTemporaryUrl($adapter, $path, $expiration, $options);
-        }
-        
-        /**
-         * Get an array of all files in a directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */ 
-        public static function files($directory = null, $recursive = false)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->files($directory, $recursive);
-        }
-        
-        /**
-         * Get all of the files from the given directory (recursive).
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */ 
-        public static function allFiles($directory = null)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->allFiles($directory);
-        }
-        
-        /**
-         * Get all of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @param bool $recursive
-         * @return array 
-         * @static 
-         */ 
-        public static function directories($directory = null, $recursive = false)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->directories($directory, $recursive);
-        }
-        
-        /**
-         * Get all (recursive) of the directories within a given directory.
-         *
-         * @param string|null $directory
-         * @return array 
-         * @static 
-         */ 
-        public static function allDirectories($directory = null)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->allDirectories($directory);
-        }
-        
-        /**
-         * Create a directory.
-         *
-         * @param string $path
-         * @return bool 
-         * @static 
-         */ 
-        public static function makeDirectory($path)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->makeDirectory($path);
-        }
-        
-        /**
-         * Recursively delete a directory.
-         *
-         * @param string $directory
-         * @return bool 
-         * @static 
-         */ 
-        public static function deleteDirectory($directory)
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->deleteDirectory($directory);
-        }
-        
-        /**
-         * Flush the Flysystem cache.
-         *
-         * @return void 
-         * @static 
-         */ 
-        public static function flushCache()
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        $instance->flushCache();
-        }
-        
-        /**
-         * Get the Flysystem driver.
-         *
-         * @return \League\Flysystem\FilesystemInterface 
-         * @static 
-         */ 
-        public static function getDriver()
-        {
-                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
-                        return $instance->getDriver();
         }
          
     }
@@ -15672,6 +15221,1250 @@ namespace Laravel\Socialite\Facades {
             //Method inherited from \Illuminate\Support\Manager            
                         /** @var \Laravel\Socialite\SocialiteManager $instance */
                         return $instance->getDrivers();
+        }
+         
+    }
+ 
+}
+
+namespace romanzipp\Twitch\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Twitch {
+        
+        /**
+         * Check if a Client ID has been set.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasClientId()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->hasClientId();
+        }
+        
+        /**
+         * Get client id.
+         *
+         * @return string 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function getClientId()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getClientId();
+        }
+        
+        /**
+         * Set client id.
+         *
+         * @param string $clientId Twitch client id
+         * @return void 
+         * @static 
+         */ 
+        public static function setClientId($clientId)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        $instance->setClientId($clientId);
+        }
+        
+        /**
+         * Fluid client id setter.
+         *
+         * @param string $clientId Twitch client id.
+         * @return self 
+         * @static 
+         */ 
+        public static function withClientId($clientId)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->withClientId($clientId);
+        }
+        
+        /**
+         * Check if a Client Secret has been set.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasClientSecret()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->hasClientSecret();
+        }
+        
+        /**
+         * Get client secret.
+         *
+         * @return string 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientSecretException
+         * @static 
+         */ 
+        public static function getClientSecret()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getClientSecret();
+        }
+        
+        /**
+         * Set client secret.
+         *
+         * @param string $clientSecret Twitch client secret
+         * @return void 
+         * @static 
+         */ 
+        public static function setClientSecret($clientSecret)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        $instance->setClientSecret($clientSecret);
+        }
+        
+        /**
+         * Fluid client secret setter.
+         *
+         * @param string $clientSecret Twitch client secret
+         * @return self 
+         * @static 
+         */ 
+        public static function withClientSecret($clientSecret)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->withClientSecret($clientSecret);
+        }
+        
+        /**
+         * Check if a Redirect URI has been set.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasRedirectUri()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->hasRedirectUri();
+        }
+        
+        /**
+         * Get Redirect URI.
+         *
+         * @return string 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresRedirectUriException
+         * @static 
+         */ 
+        public static function getRedirectUri()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getRedirectUri();
+        }
+        
+        /**
+         * Set Redirect URI.
+         *
+         * @param string $redirectUri
+         * @return void 
+         * @static 
+         */ 
+        public static function setRedirectUri($redirectUri)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        $instance->setRedirectUri($redirectUri);
+        }
+        
+        /**
+         * Fluid redirect url setter.
+         *
+         * @param string $redirectUri
+         * @return self 
+         * @static 
+         */ 
+        public static function withRedirectUri($redirectUri)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->withRedirectUri($redirectUri);
+        }
+        
+        /**
+         * Check if a OAuth token has been set.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasToken()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->hasToken();
+        }
+        
+        /**
+         * Get OAuth token.
+         *
+         * @return string Twitch token
+         * @return string|null
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresAuthenticationException
+         * @static 
+         */ 
+        public static function getToken()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getToken();
+        }
+        
+        /**
+         * Set OAuth token.
+         *
+         * @param string $token Twitch OAuth token
+         * @return void 
+         * @static 
+         */ 
+        public static function setToken($token)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        $instance->setToken($token);
+        }
+        
+        /**
+         * Fluid OAuth token setter.
+         *
+         * @param string $token Twitch OAuth token
+         * @return self 
+         * @static 
+         */ 
+        public static function withToken($token)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->withToken($token);
+        }
+        
+        /**
+         * Set the guzzle client.
+         *
+         * @param \GuzzleHttp\Client $client
+         * @static 
+         */ 
+        public static function setRequestClient($client)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->setRequestClient($client);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $path
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function get($path = '', $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->get($path, $parameters, $paginator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $path
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function post($path = '', $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->post($path, $parameters, $paginator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $path
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function put($path = '', $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->put($path, $parameters, $paginator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $method
+         * @param string $path
+         * @param array|null $body
+         * @return \romanzipp\Twitch\Result 
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function json($method, $path = '', $body = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->json($method, $path, $body);
+        }
+        
+        /**
+         * Build query & execute.
+         *
+         * @param string $method HTTP method
+         * @param string $path Query path
+         * @param array $parameters Query parameters
+         * @param \romanzipp\Twitch\Paginator $paginator Paginator object
+         * @param mixed|null $jsonBody JSON data
+         * @return \romanzipp\Twitch\Result Result object
+         * @throws \romanzipp\Twitch\Exceptions\RequestRequiresClientIdException
+         * @static 
+         */ 
+        public static function query($method = 'GET', $path = '', $parameters = [], $paginator = null, $jsonBody = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->query($method, $path, $parameters, $paginator, $jsonBody);
+        }
+        
+        /**
+         * Build query with support for multiple same first-dimension keys.
+         *
+         * @param array $query
+         * @return string 
+         * @static 
+         */ 
+        public static function buildQuery($query)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->buildQuery($query);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isAuthenticationUri($uri)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->isAuthenticationUri($uri);
+        }
+        
+        /**
+         * Get an access token based on the OAuth code flow.
+         *
+         * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow
+         * @param string|null $code
+         * @param string $grantType
+         * @param array $scopes
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getOAuthToken($code = null, $grantType = 'authorization_code', $scopes = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getOAuthToken($code, $grantType, $scopes);
+        }
+        
+        /**
+         * Get OAuth authorize url.
+         *
+         * @see https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/
+         * @param string $responseType code / token
+         * @param array $scopes
+         * @param string $state
+         * @param bool $forceVerify
+         * @return string 
+         * @static 
+         */ 
+        public static function getOAuthAuthorizeUrl($responseType = 'code', $scopes = [], $state = null, $forceVerify = false)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getOAuthAuthorizeUrl($responseType, $scopes, $state, $forceVerify);
+        }
+        
+        /**
+         * Get Bits leaderboard.
+         * 
+         * Parameters:
+         * integer      count           Number of results to be returned. Maximum: 100. Default: 10.
+         * string       period          Time period over which data is aggregated (PST time zone). This parameter interacts with started_at.
+         * string       started_at      Timestamp for the period over which the returned data is aggregated. Must be in RFC 3339 format.
+         * string       user_id         ID of the user whose results are returned; i.e., the person who paid for the bits.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-bits-leaderboard
+         * @param array $parameters
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getBitsLeaderboard($parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getBitsLeaderboard($parameters);
+        }
+        
+        /**
+         * Creates a clip programmatically. This returns both an ID and an edit URL for the new clip.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#create-clip
+         * @param int $broadcaster ID of the stream from which the clip will be made.
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function createClip($broadcaster)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->createClip($broadcaster);
+        }
+        
+        /**
+         * Gets information about a specified clip.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-clip
+         * @param string $id ID of the clip being queried. Limit 1.
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getClip($id)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getClip($id);
+        }
+        
+        /**
+         * Create Entitlement Grants Upload URL
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#create-entitlement-grants-upload-url
+         * @param string $manifest Unique identifier of the manifest file to be uploaded. Must be 1-64 characters.
+         * @param string $type Type of entitlement being granted. Only bulk_drops_grant is supported.
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function createEntitlementUrl($manifest, $type = 'bulk_drops_grant')
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->createEntitlementUrl($manifest, $type);
+        }
+        
+        /**
+         * Get currently authed user's extensions with Bearer Token
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-user-extensions
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getAuthedUserExtensions()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getAuthedUserExtensions();
+        }
+        
+        /**
+         * Get currently authed user's active extensions with Bearer Token
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getAuthedUserActiveExtensions()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getAuthedUserActiveExtensions();
+        }
+        
+        /**
+         * Disable all Extensions of the currently authed user's active extensions with Bearer Token
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see "https://dev.twitch.tv/docs/api/reference/#update-user-extensions"
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function disableAllExtensions()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->disableAllExtensions();
+        }
+        
+        /**
+         * Disables all Extensions of the currently authed user's active extensions, that have the given id with Bearer Token
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+         * @param string $parameter Id of the Extension that should be deactivated
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function disableUserExtensionById($parameter = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->disableUserExtensionById($parameter);
+        }
+        
+        /**
+         * Disables all Extensions of the currently authed user's active extensions, that have the given Name with Bearer Token
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+         * @param string $parameter Name of the Extension that should be deactivated
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function disableUserExtensionByName($parameter = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->disableUserExtensionByName($parameter);
+        }
+        
+        /**
+         * Updates the activation state, extension ID, and/or version number of installed extensions for a specified user, identified by a Bearer token.
+         * 
+         * If you try to activate a given extension under multiple extension types, the last write wins (and there is no guarantee of write order).
+         * Note: Bearer OAuth Token and the state "user:edit:broadcast" are both required
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#update-user-extensions
+         * @param string $method Method that will be used to disable extensions
+         * @param string $parameter Parameter that will be used to disable Extensions
+         * @param bool $disabled Weather the set value should be false
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function updateUserExtensions($method = null, $parameter = null, $disabled = false)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->updateUserExtensions($method, $parameter, $disabled);
+        }
+        
+        /**
+         * Gets information on follow relationships between two Twitch users
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users-follows
+         * @param int $from User ID. The request returns information about users who are being followed by the from_id user
+         * @param int|null $to User ID. The request returns information about users who are following the to_id user
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getFollows($from = null, $to = null, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getFollows($from, $to, $paginator);
+        }
+        
+        /**
+         * Gets information on follows from one user
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users-follows
+         * @param int $from User ID. The request returns information about users who are being followed by the from_id user
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getFollowsFrom($from, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getFollowsFrom($from, $paginator);
+        }
+        
+        /**
+         * Gets information on follows to one user
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users-follows
+         * @param int $to User ID. The request returns information about users who are following the to_id user
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getFollowsTo($to, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getFollowsTo($to, $paginator);
+        }
+        
+        /**
+         * Gets game information by given parameters
+         * 
+         * Parameters:
+         * string   id    Game ID. At most 100 id values can be specified.
+         * string   name  Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead, query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-games
+         * @param array $parameters Array of parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getGames($parameters)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getGames($parameters);
+        }
+        
+        /**
+         * Gets game information by game ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-games
+         * @param int $id Game ID
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getGameById($id)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getGameById($id);
+        }
+        
+        /**
+         * Gets game information by game name
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-games
+         * @param string $name Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
+         *                     query the specific Pokemon game(s) in which you are interested
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getGameByName($name)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getGameByName($name);
+        }
+        
+        /**
+         * Gets games information by game IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-games
+         * @param array $ids Game IDs. At most 100 id values can be specified
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getGamesByIds($ids)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getGamesByIds($ids);
+        }
+        
+        /**
+         * Gets games information by game names
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-games
+         * @param array $names Game name. The name must be an exact match. For instance, "Pokemon" will not return a list of Pokemon games; instead,
+         *                     query the specific Pokemon game(s) in which you are interested. At most 100 name values can be specified
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getGamesByNames($names)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getGamesByNames($names);
+        }
+        
+        /**
+         * Gets games sorted by number of current viewers on Twitch, most popular first
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-top-games
+         * @param array $parameters Array of parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getTopGames($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getTopGames($parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams
+         * Parameters:
+         * string   community_id    Returns streams in a specified community ID. You can specify up to 100 IDs.
+         * 
+         * string   game_id         Returns streams broadcasting a specified game ID. You can specify up to 100 IDs.
+         * string   language        Stream language. You can specify up to 100 languages.
+         * string   type            Stream type: "all", "live", "vodcast". Default: "all".
+         * string   user_id         Returns streams broadcast by one or more specified user IDs. You can specify up to 100 IDs.
+         * string   user_login      Returns streams broadcast by one or more specified user login names. You can specify up to 100 names.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param array $parameters Array of parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreams($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreams($parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by user ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $id Returns streams broadcast by one specified user ID
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByUserId($id, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByUserId($id, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by user name
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $name Returns streams broadcast by one specified user login name
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByUserName($name, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByUserName($name, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by user IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param array $ids Returns streams broadcast by one or more specified user IDs. You can specify up to 100 IDs
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByUserIds($ids, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByUserIds($ids, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by user IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param array $names
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByUserNames($names, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByUserNames($names, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by community ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $id Returns streams in a specified community ID
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByCommunity($id, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByCommunity($id, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by community IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $ids Returns streams in a specified community IDs. You can specify up to 100 IDs
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByCommunities($ids, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByCommunities($ids, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by game ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $id Returns streams in a specified game ID
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByGame($id, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByGame($id, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets information about active streams by game IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams
+         * @param int $ids Returns streams in a specified game IDs. You can specify up to 100 IDs
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsByGames($ids, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsByGames($ids, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets metadata information about active streams playing Overwatch or Hearthstone
+         * 
+         * Parameters:
+         * string   community_id    Returns streams in a specified community ID. You can specify up to 100 IDs.
+         * string   game_id         Returns streams broadcasting the specified game ID. You can specify up to 100 IDs.
+         * string   language        Stream language. You can specify up to 100 languages.
+         * string   type            Stream type: "all", "live", "vodcast". Default: "all".
+         * string   user_id         Returns streams broadcast by one or more of the specified user IDs. You can specify up to 100 IDs.
+         * string   user_login      Returns streams broadcast by one or more of the specified user login names. You can specify up to 100 names.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-streams-metadata
+         * @param array $parameters Array of parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getStreamsMetadata($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getStreamsMetadata($parameters, $paginator);
+        }
+        
+        /**
+         * Get currently authenticated user with Bearer Token
+         *
+         * @return \romanzipp\Twitch\Result Result object
+         * @deprecated Please use the getUsers() method.
+         * @static 
+         */ 
+        public static function getAuthedUser()
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getAuthedUser();
+        }
+        
+        /**
+         * Gets information about one or more specified Twitch users. Returns the currently authenticated
+         * user if no parameters are specified and an OAuth Token has been specified.
+         * 
+         * Parameters:
+         * string   id     User ID. Multiple user IDs can be specified. Limit: 100.
+         * string   login  User login name. Multiple login names can be specified. Limit: 100.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users
+         * @param array $parameters Array of parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getUsers($parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUsers($parameters);
+        }
+        
+        /**
+         * Gets information about one specified Twitch user by ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users
+         * @param int $id User ID
+         * @param array $parameters Additional parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getUserById($id, $parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUserById($id, $parameters);
+        }
+        
+        /**
+         * Gets information about one specified Twitch user by name
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users
+         * @param string $name User name
+         * @param array $parameters Additional parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getUserByName($name, $parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUserByName($name, $parameters);
+        }
+        
+        /**
+         * Gets information about one or more specified Twitch users by IDs
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users
+         * @param array $ids
+         * @param array $parameters Additional parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getUsersByIds($ids, $parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUsersByIds($ids, $parameters);
+        }
+        
+        /**
+         * Gets information about one or more specified Twitch users by names
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-users
+         * @param array $names
+         * @param array $parameters Additional parameters
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getUsersByNames($names, $parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUsersByNames($names, $parameters);
+        }
+        
+        /**
+         * Updates the description of a user specified by a Bearer token
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#update-user
+         * @param string $description New description
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function updateUser($description)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->updateUser($description);
+        }
+        
+        /**
+         * Gets video information by video ID (one or more), user ID (one only), or game ID (one only)
+         * 
+         * Parameters:
+         * string   id          ID of the video being queried. Limit: 100. If this is specified, you cannot use any of the optional query string parameters below.
+         * string   user_id     ID of the user who owns the video. Limit 1.
+         * string   game_id     ID of the game the video is of. Limit 1.
+         * string   language    Language of the video being queried. Limit: 1.
+         * string   period      Period during which the video was created. Valid values: "all", "day", "month", and "week". Default: "all".
+         * string   sort        Sort order of the videos. Valid values: "time", "trending", and "views". Default: "time".
+         * string   type        Type of video. Valid values: "all", "upload", "archive", and "highlight". Default: "all".
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-videos
+         * @param array $parameters Array of parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getVideos($parameters, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getVideos($parameters, $paginator);
+        }
+        
+        /**
+         * Gets video information by video ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-videos
+         * @param int $id ID of the video being queried
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getVideosById($id, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getVideosById($id, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets video information by user ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-videos
+         * @param int $user ID of the user who owns the video. Limit 1
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getVideosByUser($user, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getVideosByUser($user, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets video information by game ID
+         *
+         * @see https://dev.twitch.tv/docs/api/reference#get-videos
+         * @param int $game ID of the game the video is of. Limit 1
+         * @param array $parameters Additional parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getVideosByGame($game, $parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getVideosByGame($game, $parameters, $paginator);
+        }
+        
+        /**
+         * Gets subscriptions by user ID (one or more).
+         * 
+         * Required OAuth Scope: channel:read:subscriptions
+         * 
+         * Parameters:
+         * string broadcaster_id  ID of the broadcaster. Must match the User ID in the Bearer token. (required)
+         * string user_id         Unique identifier of account to get subscription status of. Accepts up to 100 values.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-user-subscriptions
+         * @param array $parameters Array of parameters
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getSubscriptions($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getSubscriptions($parameters, $paginator);
+        }
+        
+        /**
+         * Get all of a user's subscriptions.
+         * 
+         * Required OAuth Scope: channel:read:subscriptions
+         * 
+         * !!! The option to retrieve all users subscriptions without a broadcaster id has been removed.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
+         * @param int $user User ID
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @deprecated 
+         * @static 
+         */ 
+        public static function getUserSubscriptions($user, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getUserSubscriptions($user, $paginator);
+        }
+        
+        /**
+         * Get all of a broadcaster's subscriptions.
+         * 
+         * Required OAuth Scope: channel:read:subscriptions
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-broadcaster-subscriptions
+         * @param int $user Broadcaster ID
+         * @param \romanzipp\Twitch\Paginator|null $paginator Paginator object
+         * @return \romanzipp\Twitch\Result Result object
+         * @static 
+         */ 
+        public static function getBroadcasterSubscriptions($user, $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getBroadcasterSubscriptions($user, $paginator);
+        }
+        
+        /**
+         * Determines whether a string message meets the channel’s AutoMod requirements.
+         * 
+         * AutoMod is a moderation tool that blocks inappropriate or harassing chat with powerful moderator control. AutoMod detects
+         * misspellings and evasive language automatically. AutoMod uses machine learning and natural language processing algorithms to
+         * hold risky messages from chat so they can be reviewed by a channel moderator before appearing to other viewers in the chat.
+         * Moderators can approve or deny any message caught by AutoMod.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#check-automod-status
+         * @param array $parameters
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function checkAutoModStatus($parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->checkAutoModStatus($parameters);
+        }
+        
+        /**
+         * Returns all user bans and un-bans in a channel.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-banned-events
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getBannedEvents($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getBannedEvents($parameters, $paginator);
+        }
+        
+        /**
+         * Returns all banned and timed-out users in a channel.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-banned-users
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getBannedUsers($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getBannedUsers($parameters, $paginator);
+        }
+        
+        /**
+         * Returns all moderators in a channel.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-moderators
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getModerators($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getModerators($parameters, $paginator);
+        }
+        
+        /**
+         * Returns a list of moderators or users added and removed as moderators from a channel.
+         *
+         * @see https://dev.twitch.tv/docs/api/reference/#get-moderator-events
+         * @param array $parameters
+         * @param \romanzipp\Twitch\Helpers\Paginator|null $paginator
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getModeratorEvents($parameters = [], $paginator = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getModeratorEvents($parameters, $paginator);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $callback
+         * @param string $topic
+         * @param int|null $lease
+         * @param string|null $secret
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function subscribeWebhook($callback, $topic, $lease = null, $secret = null)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->subscribeWebhook($callback, $topic, $lease, $secret);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $callback
+         * @param string $topic
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function unsubscribeWebhook($callback, $topic)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->unsubscribeWebhook($callback, $topic);
+        }
+        
+        /**
+         * 
+         *
+         * @param array $parameters
+         * @return \romanzipp\Twitch\Result 
+         * @static 
+         */ 
+        public static function getWebhookSubscriptions($parameters = [])
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->getWebhookSubscriptions($parameters);
+        }
+        
+        /**
+         * 
+         *
+         * @param int $user
+         * @return string 
+         * @static 
+         */ 
+        public static function webhookTopicStreamMonitor($user)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->webhookTopicStreamMonitor($user);
+        }
+        
+        /**
+         * 
+         *
+         * @param int $from
+         * @return string 
+         * @static 
+         */ 
+        public static function webhookTopicUserFollows($from)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->webhookTopicUserFollows($from);
+        }
+        
+        /**
+         * 
+         *
+         * @param int $to
+         * @return string 
+         * @static 
+         */ 
+        public static function webhookTopicUserGainsFollower($to)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->webhookTopicUserGainsFollower($to);
+        }
+        
+        /**
+         * 
+         *
+         * @param int $from
+         * @param int $to
+         * @return string 
+         * @static 
+         */ 
+        public static function webhookTopicUserFollowsUser($from, $to)
+        {
+                        /** @var \romanzipp\Twitch\Twitch $instance */
+                        return $instance->webhookTopicUserFollowsUser($from, $to);
         }
          
     }
@@ -18630,6 +19423,8 @@ namespace  {
     class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Socialite extends \Laravel\Socialite\Facades\Socialite {}
+
+    class Twitch extends \romanzipp\Twitch\Facades\Twitch {}
  
 }
 

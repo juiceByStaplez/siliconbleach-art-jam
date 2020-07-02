@@ -5,26 +5,17 @@ use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+const MINUTES_IN_A_MONTH = 43200;
+
+$siteURL = config('app.site_url');
 
 Route::get('/authenticate', function(Request $request) {
-        $votes = $request->query('votes');
-
         $request->session()->put('votes', $request->query('votes'));
 
         return Socialite::with('twitch')->stateless()->redirect();
 });
 
-Route::get('/oauth/redirect', function (Request $request) {
+Route::get('/oauth/redirect', function (Request $request) use ($siteURL) {
 
     $votes = $request->session()->get('votes');
     $votes = explode(', ', $votes);
@@ -44,10 +35,10 @@ Route::get('/oauth/redirect', function (Request $request) {
 
     $email = $twitchOAuthUser->getEmail();
 
-    $preExistingUser = User::with('votes')->where('email', $email)->first();
+    $user = User::with('votes')->where('email', $email)->first();
 
-    $twitchId = $preExistingUser->twitch_id;
-    if (!$preExistingUser) {
+    $twitchId = $user->twitch_id ?? $twitchOAuthUser->getId();
+    if (!$user) {
         $username = $twitchOAuthUser->getNickname();
         $twitchId = $twitchOAuthUser->getId();
         $token = $twitchOAuthUser->accessTokenResponseBody['access_token'];
@@ -73,7 +64,7 @@ Route::get('/oauth/redirect', function (Request $request) {
             return Response::json(['success' => false, 'message' => "{$username} is not following any of the hosts"]);
         }
 
-        $twitchOAuthUser = User::create([
+        $user = User::create([
             'email'       => $email,
             'nickname'    => $twitchOAuthUser->getNickname(),
             'name'        => $twitchOAuthUser->getName(),
@@ -83,25 +74,27 @@ Route::get('/oauth/redirect', function (Request $request) {
             'voterStatus' => $followsStreamers,
         ]);
 
-
     }
+
+    $user = $preExistingUser ?? $user;
 
     $createdVotes = [];
     foreach ($votes as $vote) {
         $createdVote = Vote::create([
-            'user_id'  => $twitchOAuthUser->id,
+            'user_id'  => $user->id,
             'piece_id' => $vote
         ]);
 
         $createdVotes[] = $createdVote;
     }
 
-    return redirect()->away(config('app.contest_url'), ['user' => $user, 'votes' => $votes]);
+
+    $successfullyVotedRedirectURL = "$siteURL/jam?success=true";
+    return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, MINUTES_IN_A_MONTH );
 });
 
 Route::resource('votes', 'VotesController');
 
 Route::get('/', function (Request $request) {
-    dd($request->session()->get('votes'));
     return view('welcome');
 });

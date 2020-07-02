@@ -21,7 +21,7 @@ class VotesController extends Controller
 
         $storeInSession = Cookie::make('votes', $votes);
 
-        return Socialite::with('twitch')->stateless()->redirect();
+        return Socialite::with('twitch')->stateless()->redirect()->withInput();
     }
 
     /**
