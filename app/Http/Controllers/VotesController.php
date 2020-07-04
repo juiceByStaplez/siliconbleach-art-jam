@@ -37,7 +37,6 @@ class VotesController extends Controller
         $votes = $request->session()->pull('votes');
         $votes = explode(',', $votes);
 
-
         $createdVotes = [];
         foreach ($votes as $vote) {
             $createdVote = Vote::create([
@@ -48,9 +47,8 @@ class VotesController extends Controller
             $createdVotes[] = $createdVote;
         }
 
-        $successfullyVotedRedirectURL = "$siteURL/jam?success=true&twitch_id={$twitchId}";
+        $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
         return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
-
     }
 
     /**
