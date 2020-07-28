@@ -6,6 +6,7 @@ use App\Vote;
 use App\User;
 use Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 
 class VotesController extends Controller
