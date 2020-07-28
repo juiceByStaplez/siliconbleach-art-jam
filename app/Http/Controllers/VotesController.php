@@ -6,6 +6,7 @@ use App\Vote;
 use App\User;
 use Response;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class VotesController extends Controller
 {
@@ -39,18 +40,22 @@ class VotesController extends Controller
 
             $createdVotes = [];
             foreach ($votes as $vote) {
-                $createdVote = Vote::create([
-                    'user_id'  => $user->id,
-                    'piece_id' => $vote,
-                ]);
+                try {
 
+                    $createdVote = Vote::create([
+                        'user_id'  => $user->id,
+                        'piece_id' => $vote,
+                    ]);
+                } catch(QueryException $e) {
+                    Log::error($e->getMessage());
+                }
                 $createdVotes[] = $createdVote;
             }
 
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
             return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
         } else {
-            return Response::json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
+            return response()->json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
         }
 
 
