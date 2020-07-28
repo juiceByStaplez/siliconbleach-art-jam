@@ -24,7 +24,7 @@ class OAuthController extends Controller
     {
         $votes = $request->query('votes');
 
-        $storeInSession = Cookie::make('votes', $votes, MINUTES_IN_A_MONTH, '', $_SERVER['HTTP_X_ORIGINAL_HOST']);
+        $storeInSession = Cookie::make('votes', $votes, MINUTES_IN_A_MONTH, '', 'artofkoko.com');
 
         request()->session()->flash('votes', $votes);
 
