@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Vote;
 use App\User;
-
 use Response;
 use Illuminate\Http\Request;
 
@@ -33,22 +32,28 @@ class VotesController extends Controller
 
         $user = User::where('twitch_id', $twitchId)->first();
 
+        if ($user) {
 
-        $votes = $request->session()->pull('votes');
-        $votes = explode(',', $votes);
+            $votes = $request->session()->pull('votes');
+            $votes = explode(',', $votes);
 
-        $createdVotes = [];
-        foreach ($votes as $vote) {
-            $createdVote = Vote::create([
-                'user_id'  => $user->id,
-                'piece_id' => $vote,
-            ]);
+            $createdVotes = [];
+            foreach ($votes as $vote) {
+                $createdVote = Vote::create([
+                    'user_id'  => $user->id,
+                    'piece_id' => $vote,
+                ]);
 
-            $createdVotes[] = $createdVote;
+                $createdVotes[] = $createdVote;
+            }
+
+            $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
+            return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
+        } else {
+            return Response::json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
         }
 
-        $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
-        return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
+
     }
 
     /**
@@ -64,7 +69,7 @@ class VotesController extends Controller
 
         // check for deletes
 
-        $userVotes = Vote::where('user_id', $userId)->get()->pluck('piece_id');
+        $userVotes      = Vote::where('user_id', $userId)->get()->pluck('piece_id');
         $deletableVotes = $userVotes->diff($votes)->all();
 
         foreach ($votes as $vote) {

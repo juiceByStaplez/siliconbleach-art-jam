@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Vote;
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -67,7 +66,7 @@ class OAuthController extends Controller
         $twitchUser = $getUsers->data[0];
         $twitchId   = $twitchUser->id;
 
-        $user       = User::with('votes')->where('twitch_id', $twitchId)->first();
+        $user = User::with('votes')->where('twitch_id', $twitchId)->first();
 
 
         if (!$user) {
