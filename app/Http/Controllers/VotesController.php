@@ -45,25 +45,32 @@ class VotesController extends Controller
 
             $createdVotes = [];
             $failedVotes = [];
+            $hasDupes = false;
             foreach ($votes as $vote) {
                 $createdVote = null;
+                $createVote = [
+                    'user_id'  => $user->id,
+                    'piece_id' => $vote,
+                ];
                 try {
 
-                    $createdVote = Vote::create([
-                        'user_id'  => $user->id,
-                        'piece_id' => $vote,
-                    ]);
+                    $createdVote = Vote::create($createVote);
                 } catch(QueryException $e) {
                     if($e->getCode() === self::MYSQL_DUPLICATE_KEY_ERROR_CODE ) {
                         Log::info('Mysql duplicate key error');
                         Log::error($e->getMessage());
+                        $hasDupes = true;
                     }
 
                 }
-                if(!empty($createdVote))  {
-                    $failedVotes[]
+                if(!empty($createdVote)) {
+                    $failedVotes[] = $createVote;
                 }
 
+                if(!$hasDupes && !empty($failedVotes)) {
+                    Log::info('Votes failed, reason unsure:');
+
+                    Log::info(json_encode($failedVotes, JSON_PRETTY_PRINT));
 
                }
             }
