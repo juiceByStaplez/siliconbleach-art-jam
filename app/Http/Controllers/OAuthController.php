@@ -108,7 +108,7 @@ class OAuthController extends Controller
         if($user) {
             return redirect()->action('VotesController@create');
         } else {
-            $unsuccessfulVotingRedirect = "$siteURL?success=false&twitch_id={$twitchId}";
+            $unsuccessfulVotingRedirect = "$siteURL?success=false&twitch_id={$twitchId}&observed=1";
             return redirect()->away($unsuccessfulVotingRedirect)->cookie('usertwitchid', $twitchid, $siteurl);
         }
 
