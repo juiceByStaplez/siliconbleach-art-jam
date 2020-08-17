@@ -104,7 +104,13 @@ class OAuthController extends Controller
 
         $request->session()->flash('twitchId', $user->twitch_id);
         $request->session()->reflash();
-        return redirect()->action('VotesController@create');
+
+        if($user) {
+            return redirect()->action('VotesController@create');
+        } else {
+            $unsuccessfulVotingRedirect = "$siteURL?success=false&twitch_id={$twitchId}";
+            return redirect()->away($unsuccessfulVotingRedirect)->cookie('usertwitchid', $twitchid, $siteurl);
+        }
 
     }
 }
