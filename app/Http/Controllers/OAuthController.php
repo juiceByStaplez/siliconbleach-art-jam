@@ -53,13 +53,17 @@ class OAuthController extends Controller
 
         $authToken = '';
         if (!$getToken->success) {
+            Log::warn("Unable to perform `$twitch->getToken` resulting in failure for Twitch ID: $twitchId");
+            Log::info(json_encode($getToken->data));
             return Redirect::to($siteURL . '/jam?success=false');
         }
 
-        $authToken = $getToken->data->access_token;
+        $authToken = $getToken->data->access_token ?? false;
         $getUsers  = $client->withToken($authToken)->getusers();
 
         if (!$getUsers->success) {
+            Log::warn("Unable to perform `$twitch->getUsers` resulting in failure for Twitch ID: $twitchId) ");
+            Log::info(json_encode($getUsers));
             return Redirect::to($siteURL . '/jam?success=false');
         }
 

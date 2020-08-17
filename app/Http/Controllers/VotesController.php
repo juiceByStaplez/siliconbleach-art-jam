@@ -7,10 +7,13 @@ use App\User;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Whoops\Exception\ErrorException;
 use Illuminate\Database\QueryException;
 
 class VotesController extends Controller
 {
+    const MYSQL_DUPLICATE_KEY_ERROR_CODE = 1062;
+
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +29,8 @@ class VotesController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
+
         $siteURL = config('app.contest_url');
 
         $twitchId = $request->session()->pull('twitchId');
@@ -39,8 +42,11 @@ class VotesController extends Controller
             $votes = $request->session()->pull('votes');
             $votes = explode(',', $votes);
 
+
             $createdVotes = [];
+            $failedVotes = [];
             foreach ($votes as $vote) {
+                $createdVote = null;
                 try {
 
                     $createdVote = Vote::create([
@@ -48,9 +54,18 @@ class VotesController extends Controller
                         'piece_id' => $vote,
                     ]);
                 } catch(QueryException $e) {
-                    Log::error($e->getMessage());
+                    if($e->getCode() === self::MYSQL_DUPLICATE_KEY_ERROR_CODE ) {
+                        Log::info('Mysql duplicate key error');
+                        Log::error($e->getMessage());
+                    }
+
                 }
-                $createdVotes[] = $createdVote;
+                if(!empty($createdVote))  {
+                    $failedVotes[]
+                }
+
+
+               }
             }
 
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
