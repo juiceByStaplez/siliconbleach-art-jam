@@ -8,6 +8,7 @@ use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Whoops\Exception\ErrorException;
+use romanzipp\Twitch\Twitch;
 use Illuminate\Database\QueryException;
 
 class VotesController extends Controller
@@ -27,7 +28,7 @@ class VotesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function create(Request $request) {
 
@@ -41,7 +42,6 @@ class VotesController extends Controller
 
             $votes = $request->session()->pull('votes');
             $votes = explode(',', $votes);
-
 
             $createdVotes = [];
             $failedVotes = [];
@@ -70,12 +70,11 @@ class VotesController extends Controller
         } else {
 
             // user not in database check Twitch
-            $getUser = Twitch::get_current_user();
+            $unsuccessfulVotingURL = "$siteURL?success=false&twitch_id={$twitchId}";
+            return redirect()->away($unsuccessfulVotingURL)->cookie('userTwitchId', $twitchId, $siteURL);
+//            $getUser = new Twitch();
 
-            dd($getUser);
-
-
-            return response()->json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
+//            return response()->json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
         }
 
 
