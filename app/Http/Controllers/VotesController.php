@@ -64,14 +64,13 @@ class VotesController extends Controller
                     $failedVotes[] = $createdVote;
                 }
             }
-
+            
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
             return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
         } else {
 
             // user not in database check Twitch
 
-            dd($twitchId);
             $unsuccessfulVotingURL = "$siteURL?success=false&twitch_id={$twitchId}";
             return redirect()->away($unsuccessfulVotingURL)->cookie('userTwitchId', $twitchId, $siteURL);
 //            $getUser = new Twitch();
