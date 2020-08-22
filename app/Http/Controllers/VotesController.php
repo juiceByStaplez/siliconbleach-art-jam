@@ -53,7 +53,7 @@ class VotesController extends Controller
                         'user_id'  => $user->id,
                         'piece_id' => $vote,
                     ]);
-                } catch(ErrorException $e) {
+                } catch(QueryException $e) {
                     if($e->getCode() === self::MYSQL_DUPLICATE_KEY_ERROR_CODE ) {
                         Log::info('Mysql duplicate key error');
                         Log::error($e->getMessage());
@@ -70,6 +70,8 @@ class VotesController extends Controller
         } else {
 
             // user not in database check Twitch
+
+            dd($twitchId);
             $unsuccessfulVotingURL = "$siteURL?success=false&twitch_id={$twitchId}";
             return redirect()->away($unsuccessfulVotingURL)->cookie('userTwitchId', $twitchId, $siteURL);
 //            $getUser = new Twitch();
