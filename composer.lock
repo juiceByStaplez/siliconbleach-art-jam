@@ -1803,18 +1803,6 @@
         },
         {
             "name": "nikic/php-parser",
-<<<<<<< HEAD
-            "version": "v4.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c346bbfafe2ff60680258b631afb730d186ed864",
-                "reference": "c346bbfafe2ff60680258b631afb730d186ed864",
-=======
             "version": "v4.9.0",
             "source": {
                 "type": "git",
@@ -1825,7 +1813,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/aaee038b912e567780949787d5fe1977be11a778",
                 "reference": "aaee038b912e567780949787d5fe1977be11a778",
->>>>>>> 45b330f818a87ed3a1bc463b38a414c44eb275c5
                 "shasum": ""
             },
             "require": {
@@ -1864,11 +1851,7 @@
                 "parser",
                 "php"
             ],
-<<<<<<< HEAD
-            "time": "2020-07-02T17:12:47+00:00"
-=======
             "time": "2020-08-18T19:48:01+00:00"
->>>>>>> 45b330f818a87ed3a1bc463b38a414c44eb275c5
         },
         {
             "name": "opis/closure",
@@ -6955,6 +6938,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
