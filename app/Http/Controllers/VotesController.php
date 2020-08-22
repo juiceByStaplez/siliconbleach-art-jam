@@ -61,9 +61,8 @@ class VotesController extends Controller
 
                 }
                 if(!empty($createdVote))  {
-                    $failedVotes[]
+                    $failedVotes[] = $createdVote;
                 }
-               }
             }
 
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
