@@ -45,39 +45,37 @@ class VotesController extends Controller
 
             $createdVotes = [];
             $failedVotes = [];
-            $hasDupes = false;
             foreach ($votes as $vote) {
                 $createdVote = null;
-                $createVote = [
-                    'user_id'  => $user->id,
-                    'piece_id' => $vote,
-                ];
                 try {
 
-                    $createdVote = Vote::create($createVote);
-                } catch(QueryException $e) {
+                    $createdVote = Vote::create([
+                        'user_id'  => $user->id,
+                        'piece_id' => $vote,
+                    ]);
+                } catch(ErrorException $e) {
                     if($e->getCode() === self::MYSQL_DUPLICATE_KEY_ERROR_CODE ) {
                         Log::info('Mysql duplicate key error');
                         Log::error($e->getMessage());
-                        $hasDupes = true;
                     }
 
                 }
-                if(!empty($createdVote)) {
-                    $failedVotes[] = $createVote;
+                if(!empty($createdVote))  {
+                    $failedVotes[]
                 }
-
-                if(!$hasDupes && !empty($failedVotes)) {
-                    Log::info('Votes failed, reason unsure:');
-
-                    Log::info(json_encode($failedVotes, JSON_PRETTY_PRINT));
-
                }
             }
 
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
             return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
         } else {
+
+            // user not in database check Twitch
+            $getUser = Twitch::get_current_user();
+
+            dd($getUser);
+
+
             return response()->json(['success' => false, 'message' => 'Unable to find user with that ID'], 404);
         }
 
