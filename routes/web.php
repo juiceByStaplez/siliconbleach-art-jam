@@ -12,3 +12,5 @@ Route::get('/oauth/redirect', 'OAuthController@getToken');
 
 Route::resource('votes', 'VotesController');
 
+
+
