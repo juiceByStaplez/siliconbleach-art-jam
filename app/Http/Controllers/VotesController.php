@@ -92,7 +92,11 @@ class VotesController extends Controller
         $votes  = $request->votes;
         $userId = $request->user['id'];
 
-        
+
+        $
+
+
+
         // check for deletes
 
         $userVotes      = Vote::where('user_id', $userId)->get()->pluck('piece_id');
