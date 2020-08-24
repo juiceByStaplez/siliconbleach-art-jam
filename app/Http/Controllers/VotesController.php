@@ -64,7 +64,7 @@ class VotesController extends Controller
                     $failedVotes[] = $createdVote;
                 }
             }
-            
+
             $successfullyVotedRedirectURL = "$siteURL?success=true&twitch_id={$twitchId}";
             return redirect()->away($successfullyVotedRedirectURL)->cookie('userTwitchId', $twitchId, $siteURL);
         } else {
