@@ -14,4 +14,8 @@ class Piece extends Model
         return $this->hasOne('App\User::class');
     }
 
+    public function votes()
+    {
+        return $this->hasMany('App\Vote::class');
+    }
 }
