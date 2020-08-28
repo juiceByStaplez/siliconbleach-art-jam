@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Vote;
 use App\User;
 use Response;
+use App\Piece;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Whoops\Exception\ErrorException;
@@ -18,11 +19,12 @@ class VotesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
-
+        $pieces = Piece::all();
+       return response()->json(['pieces' => $pieces]);
     }
 
     /**
@@ -91,6 +93,11 @@ class VotesController extends Controller
     {
         $votes  = $request->votes;
         $userId = $request->user['id'];
+
+
+        $
+
+
 
         // check for deletes
 
